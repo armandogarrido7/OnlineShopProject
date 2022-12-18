@@ -125,6 +125,7 @@ class Model {
         request.open("POST", "https://fakestoreapi.com/auth/login", true);
         request.onreadystatechange = () => {
             if (request.readyState == XMLHttpRequest.DONE) {
+                View.hideLoading();
                 if (request.status == 200) {
                     console.log('login correcto');
                 } else {
@@ -133,6 +134,7 @@ class Model {
             }
         };
         request.send(JSON.stringify({ "username": username, "password": password }));
+        View.showLoading();
     }
     static sendRequest(request_text, action) {
         let request = new XMLHttpRequest();
