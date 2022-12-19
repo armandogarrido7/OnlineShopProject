@@ -21,7 +21,14 @@ class View {
                     main.innerHTML += "<div class='cart_product' id='" + product.id + "'><h3>" + product.title + "</h3><img src=" + product.image + "><div class='price'>" + (product.price * product.quantity).toFixed(2) + "€ </div><div class='input_div'><input type='number' id=" + product.id + " class='product_quantity'  min=1 max=99 step=1 value=" + product.quantity + "> uds</div><i id='" + product.id + "'class='fa-solid fa-trash fa-xl'></i></div>";
                 }
             }
-            main.innerHTML += "<div id='summary'>Total Price: <span>" + (Model.getCartPrice()).toFixed(2) + "€</span></div><button id='buy_btn'>Buy</button>";
+            let subtotal = Model.getCartPrice();
+            let shipping = 4.99;
+            if (Model.getCartPrice() > 50) {
+                shipping = 0;
+            }
+            let shipping_text = (shipping == 0 ? "<div class='free_shipping'>4.99€</div> - <span>FREE!</span>" : "<span>4.99€</span>");
+            console.log(shipping_text)
+            main.innerHTML += "<div id='summary'><div>Subtotal <span>" + subtotal.toFixed(2) + "€</span></div><div>Shipping " + shipping_text + "</div><hr><div>Total <span>" + (subtotal + shipping).toFixed(2) + "€</span></div><button id='buy_btn'>Buy</button></div>";
             $(".fa-trash").click(function() {
                 Model.removeProductFromCart($(this)[0].id);
                 View.showCart();

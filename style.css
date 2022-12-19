@@ -43,6 +43,7 @@ header {
     max-width: 100%;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
+    cursor: pointer;
 }
 
 #show_home:hover {
@@ -55,6 +56,7 @@ header {
     z-index: 50;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    cursor: pointer;
 }
 
 #show_cart {
@@ -65,6 +67,10 @@ header {
 #show_login {
     grid-column: 16 / 17;
     grid-row: 2 / 3;
+}
+
+i {
+    cursor: pointer;
 }
 
 i:hover {
@@ -92,6 +98,7 @@ nav {
     transition: all 0.1s ease-in-out;
     margin-bottom: -4px;
     border-bottom: 4px solid var(--tertiary-color);
+    cursor: pointer;
 }
 
 .selected {
@@ -130,6 +137,12 @@ nav {
 
 #products>select {
     grid-column: 4 / -1;
+    border-radius: 5px;
+    padding: 1vh 1vw;
+}
+
+#products>select>option {
+    padding: 1vh 1vw;
 }
 
 .product {
@@ -254,7 +267,7 @@ nav {
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    row-gap: 2vh;
+    row-gap: 3vh;
     column-gap: 1vw;
 }
 
@@ -275,22 +288,35 @@ nav {
 
 .cart_product {
     padding: 1vh 1vw;
-    grid-column: 2 / -3;
+    grid-column: 2 / -4;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 10vh);
-    border: 1px solid black;
     border-radius: 10px;
+    box-shadow: 3px 3px 15px gray;
 }
 
 #shopping_cart #summary {
-    border: 1px solid black;
+    width: 80%;
+    box-shadow: 3px 3px 15px gray;
     border-radius: 10px;
-    grid-column: -3 / -1;
+    grid-column: -4 / -2;
     grid-row: 2 / 3;
     align-self: center;
     justify-self: center;
-    padding: 1vh 1vw;
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-content: center;
+    justify-content: center;
+}
+
+.free_shipping {
+    display: inline-block;
+    color: red;
+    text-decoration: line-through;
+    font-weight: bolder;
 }
 
 #summary span {
@@ -308,6 +334,7 @@ nav {
     height: 100%;
     grid-column: 1 / 2;
     grid-row: 1 / -1;
+    object-fit: contain;
 }
 
 .cart_product>.price {
@@ -514,7 +541,7 @@ footer>div {
 
 /*MEDIA QUERIES*/
 
-@media(max-width:600px) {
+@media(max-width:768px) {
     header {
         column-gap: 2vw;
     }
