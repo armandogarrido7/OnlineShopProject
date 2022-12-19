@@ -18,10 +18,10 @@ class View {
         if (products.length != 0) {
             for (let product of products) {
                 if (product) {
-                    main.innerHTML += "<div class='cart_product' id='" + product.id + "'><h3>" + product.title + "</h3><img src=" + product.image + "><div class='price'>" + (product.price * product.quantity).toFixed(2) + "€ </div><div class='input_div'><input id=" + product.id + " class='product_quantity' type='number' min=1 max=99 value=" + product.quantity + "> uds</div><i id='" + product.id + "'class='fa-solid fa-trash fa-xl'></i></div>";
+                    main.innerHTML += "<div class='cart_product' id='" + product.id + "'><h3>" + product.title + "</h3><img src=" + product.image + "><div class='price'>" + (product.price * product.quantity).toFixed(2) + "€ </div><div class='input_div'><input type='number' id=" + product.id + " class='product_quantity'  min=1 max=99 step=1 value=" + product.quantity + "> uds</div><i id='" + product.id + "'class='fa-solid fa-trash fa-xl'></i></div>";
                 }
             }
-            main.innerHTML += "<div id='summary'>Total Price: <span>" + (Model.getCartPrice()).toFixed(2) + "€</span></div>";
+            main.innerHTML += "<div id='summary'>Total Price: <span>" + (Model.getCartPrice()).toFixed(2) + "€</span></div><button id='buy_btn'>Buy</button>";
             $(".fa-trash").click(function() {
                 Model.removeProductFromCart($(this)[0].id);
                 View.showCart();
@@ -89,10 +89,12 @@ class View {
             stars[i].classList.add("checked");
         }
         $('#add_to_cart').click(function() {
-            $(this).html("Product added to Cart!");
+            $(this).addClass("lime_background");
+            $(this).html("<i class='fa-solid fa-cart-arrow-down fa-xl'></i>Product added!");
             setTimeout(() => {
                 $(this).html("<i class='fa-solid fa-cart-plus fa-xl'></i>Add to Cart");
-            }, 1000)
+                $(this).removeClass("lime_background");
+            }, 2000)
             Model.addToCart(product, Number($("#product_quantity").val()));
 
         });
@@ -220,7 +222,6 @@ class Model {
 }
 class Controller {
     static clickOnCart() {
-        View.hideNav();
         View.showCart();
 
     }
@@ -247,8 +248,9 @@ class Controller {
             template_id: 'template_k2t1x4h',
             user_id: 'OMTzvYPy-dCjSCRP2',
             template_params: {
-                'from_name': 'Clothes Shop',
+                'from_name': 'Online Shop',
                 'to_name': name + " " + surnames,
+                'to_email': email,
                 'g-recaptcha-response': '03AHJ_ASjnLA214KSNKFJAK12sfKASfehbmfd...'
             }
         };
@@ -273,7 +275,7 @@ class Controller {
                             "long": '81.1496'
                         }
                     },
-                    phone: '1-570-236-7033'
+                    "phone": phone
                 })
             })
             .then(res => res.json())
@@ -320,11 +322,10 @@ window.onload = () => {
     }
     main = document.getElementsByTagName("main")[0];
     nav = document.getElementsByTagName("nav")[0];
-    // show_nav_btn = document.getElementById("show_nav");
+    show_nav_btn = document.getElementById("show_menu");
     categories = document.getElementsByClassName("category");
     home_btn = document.getElementById("show_home");
     home_btn.addEventListener("click", () => {
-        View.showNav();
         View.showHome();
         for (category of categories) {
             category.classList.remove('selected');
@@ -333,7 +334,6 @@ window.onload = () => {
     })
     login_btn = document.getElementById("show_login");
     login_btn.addEventListener("click", () => {
-        View.hideNav();
         View.showLogin();
         for (category of categories) {
             category.classList.remove('selected');
@@ -347,6 +347,13 @@ window.onload = () => {
         }
         Controller.clickOnCart();
         // history.pushState(null, "", "ShoppingCart");
+    });
+    show_nav_btn.addEventListener("click", () => {
+        if (nav.classList.contains("mobile_shown")) {
+            nav.classList.remove("mobile_shown");
+        } else {
+            nav.classList.add("mobile_shown");
+        }
     });
     for (div of document.getElementsByClassName("category")) {
         div.addEventListener("click", (e) => {
