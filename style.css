@@ -128,8 +128,19 @@ nav {
     grid-column: 4 / -1;
 }
 
+.product {
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px gray;
+    padding: 1vh 1vw;
+}
+
 .product:hover {
     cursor: pointer;
+}
+
+.product:hover img {
+    transition: all 0.3s ease-in-out;
+    scale: 1.2;
 }
 
 .product_img {
@@ -453,8 +464,8 @@ footer>div {
 .lds-ring {
     display: inline-block;
     position: absolute;
-    top: 47vh;
-    left: 47vw;
+    top: calc(50vh - 80px);
+    left: calc(50vw - 80px);
     width: 80px;
     height: 80px;
 }

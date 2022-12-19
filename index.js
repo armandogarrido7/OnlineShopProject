@@ -20,7 +20,7 @@ class View {
                     main.innerHTML += "<div class='cart_product' id='" + product.id + "'><h3>" + product.title + "</h3><img src=" + product.image + "><div class='price'>" + (product.price * product.quantity).toFixed(2) + "€ </div><div class='input_div'><input id=" + product.id + " class='product_quantity' type='number' min=1 max=99 value=" + product.quantity + "> uds</div><i id='" + product.id + "'class='fa-solid fa-trash fa-xl'></i></div>";
                 }
             }
-            main.innerHTML += "<div id='summary'>Total Price: <span>" + Model.getCartPrice() + "€</span></div>";
+            main.innerHTML += "<div id='summary'>Total Price: <span>" + (Model.getCartPrice()).toFixed(2) + "€</span></div>";
             $(".fa-trash").click(function() {
                 console.log($(this)[0]);
                 Model.removeProductFromCart($(this)[0].id);
@@ -29,7 +29,7 @@ class View {
             $(".product_quantity").change(function() {
                 Model.changeProductQuantity($(this)[0].id, $(this).val())
                 View.showCart();
-            })
+            });
         } else {
             main.innerHTML += "<h3>Your shopping cart is empty!</h3>"
         }
