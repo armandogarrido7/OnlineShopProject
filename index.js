@@ -14,7 +14,8 @@ class View {
         let products = Model.getCartProducts();
         main.id = "shopping_cart"
         main.innerHTML = "<h2>Shopping Cart</h2>";
-        if (products) {
+        products = products.filter(n => n);
+        if (products.length != 0) {
             for (let product of products) {
                 if (product) {
                     main.innerHTML += "<div class='cart_product' id='" + product.id + "'><h3>" + product.title + "</h3><img src=" + product.image + "><div class='price'>" + (product.price * product.quantity).toFixed(2) + "€ </div><div class='input_div'><input id=" + product.id + " class='product_quantity' type='number' min=1 max=99 value=" + product.quantity + "> uds</div><i id='" + product.id + "'class='fa-solid fa-trash fa-xl'></i></div>";
@@ -22,7 +23,6 @@ class View {
             }
             main.innerHTML += "<div id='summary'>Total Price: <span>" + (Model.getCartPrice()).toFixed(2) + "€</span></div>";
             $(".fa-trash").click(function() {
-                console.log($(this)[0]);
                 Model.removeProductFromCart($(this)[0].id);
                 View.showCart();
             })
