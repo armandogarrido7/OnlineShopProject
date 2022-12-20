@@ -363,7 +363,6 @@ window.onload = () => {
             category.classList.remove('selected');
         }
         Controller.clickOnCart();
-        // history.pushState(null, "", "ShoppingCart");
     });
     show_nav_btn.addEventListener("click", () => {
         if (nav.classList.contains("mobile_shown")) {

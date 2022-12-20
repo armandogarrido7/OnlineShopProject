@@ -454,24 +454,6 @@ nav {
 }
 
 
-/* #progress_bar {
-    background-color: lime;
-    border: 1px solid black;
-    width: 100%;
-    height: 1vh;
-    animation: progress_bar 2s linear infinite;
-}
-
-@keyframes progress_bar {
-    0% {
-        width: 0
-    }
-    100% {
-        width: 100%
-    }
-} */
-
-
 /*MAIN*/
 
 main {
@@ -630,6 +612,25 @@ footer>div {
 /*MEDIA QUERIES*/
 
 @media(max-width:768px) {
+    #men {
+        grid-column: 2 / -2;
+    }
+    #women {
+        grid-column: 2 / -2;
+        grid-row: 4 / 5;
+    }
+    #jewelery {
+        grid-column: 2 / -2;
+        grid-row: 5 / 6;
+    }
+    #electronics {
+        grid-column: 2 / -2;
+        grid-row: 6 / 7;
+    }
+    #newsletter input {
+        width: 60%;
+        margin: auto;
+    }
     header {
         column-gap: 2vw;
     }
@@ -738,5 +739,31 @@ footer>div {
     #login>div:first-child {
         border-right: 0px;
         border-bottom: 2px solid black;
+    }
+    .cart_product {
+        grid-column: 2 / -2;
+        display: flex;
+        flex-direction: column;
+        padding: 2vh 2vw;
+        gap: 2vh;
+    }
+    .cart_product>i {
+        padding: 2vh 2vw;
+    }
+    .cart_product>img {
+        width: 75%;
+        height: 30vh;
+        object-fit: contain;
+        align-self: center;
+    }
+    #shopping_cart #summary {
+        grid-column: 1 / -1;
+    }
+    #login input {
+        width: 70%;
+    }
+    #social_networks {
+        display: flex;
+        flex-direction: row;
     }
 }
