@@ -77,9 +77,9 @@ class View {
             }
         })
     }
-    static showHome(products) {
+    static showHome() {
         main.id = 'home';
-        main.innerHTML = '<div id="slider"><div class="mySlides fade"><img src="./img/slider_1.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_2.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_3.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_4.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_5.jpg" style="width:100%"></div><div id="progress_bar"></div></div>';
+        main.innerHTML = '<div id="slider"><div class="mySlides fade"><img src="./img/slider_1.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_2.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_3.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_4.jpg" style="width:100%"></div><div class="mySlides fade"><img src="./img/slider_5.jpg" style="width:100%"></div><div id="progress_bar"></div></div><h2 id="new_products">Discover our new products</h2><div id="men" class="category_link"><img src="https://staticpages.mngbcn.com/homes/images/fw22/he/noviembre/landing__he3.jpg" alt="men"></div><div id="women" class="category_link"><img src="https://staticpages.mngbcn.com/homes/images/fw22/she/diciembre/she_landing_vestidos_1912.jpg?imwidth=505&amp;imdensity=1&amp;impolicy=set_13&quot" alt="women"></div><div id="jewelery" class="category_link"><img src="https://media.istockphoto.com/id/1338646661/photo/gold-jewelry-diamond-rings-show-in-luxury-retail-store-window-display-showcase.jpg?b=1&s=170667a&w=0&k=20&c=IjIyYsOhjFangGZVqki_9YHTtbN3JBFyQs7GXPA_eV0=" alt="jewelery"></div><div id="electronics" class="category_link"><img src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?cs=srgb&dl=pexels-pixabay-356056.jpg&fm=jpg" alt="women"></div><div id="newsletter"><h2>Subscribe to our newsletter!</h2><input type="email"></div>';
     }
     static showNav() {
         nav.style.display = "flex";
@@ -170,6 +170,7 @@ class Model {
     }
     static getCategory(category_text) {
         View.showLoading();
+        let category = "";
         if (category_text == "Men") {
             category = "men's%20clothing";
         } else if (category_text == "Women") {
@@ -180,7 +181,6 @@ class Model {
             category = "electronics";
         }
         let request_text = "https://fakestoreapi.com/products/category/" + category;
-        // this.sendRequest(request_text);
         fetch(request_text).then(res => res.json()).then(json => View.showProducts(json));
     }
     static addToCart(product, quantity) {
@@ -337,7 +337,18 @@ window.onload = () => {
         for (category of categories) {
             category.classList.remove('selected');
         }
-        // history.pushState(null, "", "Home");
+        $("#men").click(function() {
+            Controller.clickOnCategory('Men');
+        });
+        $("#women").click(function() {
+            Controller.clickOnCategory('Women');
+        });
+        $("#jewelery").click(function() {
+            Controller.clickOnCategory('Jewelery');
+        });
+        $("#electronics").click(function() {
+            Controller.clickOnCategory('Electronics');
+        });
     })
     login_btn = document.getElementById("show_login");
     login_btn.addEventListener("click", () => {
@@ -345,7 +356,6 @@ window.onload = () => {
         for (category of categories) {
             category.classList.remove('selected');
         }
-        // history.pushState(null, "", "Login");
     });
     cart_btn = document.getElementById("show_cart");
     cart_btn.addEventListener("click", () => {
@@ -369,7 +379,18 @@ window.onload = () => {
             }
             e.target.classList.add('selected');
             Controller.clickOnCategory(e.target.innerHTML);
-            // history.pushState(null, "", e.target.innerHTML);
         })
     }
+    $("#men").click(function() {
+        Controller.clickOnCategory('Men');
+    });
+    $("#women").click(function() {
+        Controller.clickOnCategory('Women');
+    });
+    $("#jewelery").click(function() {
+        Controller.clickOnCategory('Jewelery');
+    });
+    $("#electronics").click(function() {
+        Controller.clickOnCategory('Electronics');
+    });
 }
